@@ -3,6 +3,7 @@ JDB.behaviours = JDB.behaviours or {}
 
 include( "context.lua" )
 include( "jobgroups.lua" )
+include( "helper.lua" )
 
 function JDB.new()
     local behaviour = {}

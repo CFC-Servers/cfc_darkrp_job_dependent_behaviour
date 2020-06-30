@@ -54,6 +54,8 @@ function CONTEXT:LimitsJob( jobName )
 
         if value == JDB.INF_JOBS then value = 0 end
 
+        if value < -1 then value = -1 end
+
         jobTable.max = value
 
         BroadcastLua( "( DarkRP.getJobByCommand( \"" .. jobName .. "\" ) or {} ).max = " .. value )
