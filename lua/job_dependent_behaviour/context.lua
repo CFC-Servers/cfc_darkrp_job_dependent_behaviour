@@ -6,6 +6,8 @@ JDB.GREATER_OR_EQUAL = 1
 JDB.LESS = 2
 JDB.LESS_OR_EQUAL = 3
 
+JDB.INF_JOBS = -1001
+
 CONTEXT.equation = function( x ) return x end
 CONTEXT.action = function() end
 
@@ -46,6 +48,11 @@ function CONTEXT:LimitsJob( jobName )
         if not jobTable then
             error( "Attempt to limit job " .. jobName .. ", which does not exist" )
         end
+
+        -- A max of 0 in DarkRP means infinite, likely not what you want with a job limiter
+        if value == 0 then value = -1 end
+
+        if value == JDB.INF_JOBS then value = 0 end
 
         jobTable.max = value
 
