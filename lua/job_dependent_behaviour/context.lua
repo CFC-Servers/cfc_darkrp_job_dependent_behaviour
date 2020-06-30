@@ -1,25 +1,25 @@
 local CONTEXT = {}
 
-JBD.CONTEXT = CONTEXT
-JBD.GREATER = 0
-JBD.GREATER_OR_EQUAL = 1
-JBD.LESS = 2
-JBD.LESS_OR_EQUAL = 3
+JDB.CONTEXT = CONTEXT
+JDB.GREATER = 0
+JDB.GREATER_OR_EQUAL = 1
+JDB.LESS = 2
+JDB.LESS_OR_EQUAL = 3
 
 CONTEXT.equation = function( x ) return x end
 CONTEXT.action = function() end
 
 local compFuncs = {
-    [JBD.GREATER] = function( a, b )
+    [JDB.GREATER] = function( a, b )
         return a > b
     end,
-    [JBD.GREATER_OR_EQUAL] = function( a, b )
+    [JDB.GREATER_OR_EQUAL] = function( a, b )
         return a >= b
     end,
-    [JBD.LESS] = function( a, b )
+    [JDB.LESS] = function( a, b )
         return a < b
     end,
-    [JBD.LESS_OR_EQUAL] = function( a, b )
+    [JDB.LESS_OR_EQUAL] = function( a, b )
         return a <= b
     end,
 }
@@ -82,7 +82,7 @@ function CONTEXT:UpdateValue()
 
     local inputValues = {}
     for k, v in ipairs( self.inputs ) do
-        inputValues[k] = JBD.groups.getPlayerCount( v )
+        inputValues[k] = JDB.groups.getPlayerCount( v )
     end
 
     local value = self.equation( unpack( inputValues ) )

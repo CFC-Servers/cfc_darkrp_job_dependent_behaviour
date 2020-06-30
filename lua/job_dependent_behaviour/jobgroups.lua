@@ -1,10 +1,10 @@
-JBD.groups = JBD.groups or {}
+JDB.groups = JDB.groups or {}
 
 -- Jobs can be a list of jobs, or a function getter
-function JBD.groups.add( name, jobs )
+function JDB.groups.add( name, jobs )
     name = string.lower( name )
 
-    if JBD.groups[name] then
+    if JDB.groups[name] then
         error( "Group with name " .. name .. " already exists" )
     end
 
@@ -14,29 +14,29 @@ function JBD.groups.add( name, jobs )
         end
     end
 
-    JBD.groups[name] = jobs
+    JDB.groups[name] = jobs
 end
 
-function JBD.groups.exists( name )
+function JDB.groups.exists( name )
     name = string.lower( name )
 
-    return tobool( JBD.groups[name] )
+    return tobool( JDB.groups[name] )
 end
 
-function JBD.groups.addIfNotExists( name, jobs )
+function JDB.groups.addIfNotExists( name, jobs )
     name = string.lower( name )
 
-    if not JBD.groups.exists( name ) then
-        JBD.groups.add( name, jobs )
+    if not JDB.groups.exists( name ) then
+        JDB.groups.add( name, jobs )
     end
 end
 
-function JBD.groups.getPlayers( name )
+function JDB.groups.getPlayers( name )
     name = string.lower( name )
 
     if name == "ALL" then return player.GetAll() end
 
-    local getter = JBD.groups[name]
+    local getter = JDB.groups[name]
     if not getter then
         getter = function( ply )
             return string.lower( ply:getDarkRPVar( "job" ) ) == string.lower( name )
@@ -60,10 +60,10 @@ function JBD.groups.getPlayers( name )
     return plys
 end
 
-function JBD.groups.getPlayerCount( name )
-    return #JBD.groups.getPlayers( name )
+function JDB.groups.getPlayerCount( name )
+    return #JDB.groups.getPlayers( name )
 end
 
-JBD.groups.addIfNotExists( "CP", function( ply )
+JDB.groups.addIfNotExists( "CP", function( ply )
     return ply:isCP()
 end )
