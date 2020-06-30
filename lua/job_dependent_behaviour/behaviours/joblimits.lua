@@ -8,5 +8,5 @@ hook.Add( "cfc_jbd_init", "cfc_jbd_jobLimits", function()
     hitmanLimiter:Via( function( cpCount )
         return cpCount + 1
     end )
-    hitmanLimiter:LimitsJob( "hitman" )
+    hitmanLimiter:LimitsJob( "mercenary" )
 end )
