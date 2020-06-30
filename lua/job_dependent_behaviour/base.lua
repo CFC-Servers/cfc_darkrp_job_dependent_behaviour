@@ -31,7 +31,12 @@ hook.Add( "DarkRPVarChanged", "cfc_job_dependent_behaviour", function( ply, varN
     timer.Simple( 0, JDB.UpdateBehaviours )
 end )
 
-hook.Add( "PlayerDisconnected", "cfc_job_dependent_behaviour", JDB.UpdateBehaviours )
+hook.Add( "PlayerDisconnected", "cfc_job_dependent_behaviour", function()
+    -- Give time for player.GetAll() to update
+    timer.Simple( 0, function()
+        JDB.UpdateBehaviours()
+    end )
+end )
 
 -- Include inbuilt behaviours
 local files = file.Find( "job_dependent_behaviour/behaviours/*", "LUA" )
