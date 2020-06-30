@@ -34,6 +34,8 @@ end
 function JBD.groups.getPlayers( name )
     name = string.lower( name )
 
+    if name == "ALL" then return player.GetAll() end
+
     local getter = JBD.groups[name]
     if not getter then
         getter = function( ply )

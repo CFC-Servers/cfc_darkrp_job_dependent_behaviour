@@ -24,7 +24,7 @@ local compFuncs = {
     end,
 }
 
-function CONTEXT:SetAction( f )
+function CONTEXT:Do( f )
     self.action = f
 
     local this = self
@@ -33,26 +33,42 @@ function CONTEXT:SetAction( f )
     end )
 end
 
-function CONTEXT:SetEquation( f )
+function CONTEXT:LimitsJob( jobName )
+    self:Do( function( value )
+        if type( value ) ~= "number" then
+            error( "Job limiter returned non-numeric value" )
+        end
+
+        value = math.floor( value )
+
+        local jobTable = DarkRP.getJobByCommand( jobName )
+
+        if not jobTable then
+            error( "Attempt to limit job " .. jobName .. ", which does not exist" )
+        end
+
+        jobTable.max = value
+
+        BroadcastLua( "( DarkRP.getJobByCommand( \"" .. jobName .. "\" ) or {} ).max = " .. value )
+    end )
+end
+
+function CONTEXT:Via( f )
     self.equation = f
 end
 
-function CONTEXT:SetThreshhold( threshold, thresholdType )
+function CONTEXT:Threshhold( threshold, thresholdType )
     local compFunc = compFuncs[thresholdType]
     if not compFunc then
         error( "Invalid comparison type" )
     end
 
-    self:SetEquation( function( val )
+    self:Via( function( val )
         return compFunc( val, threshold )
     end )
 end
 
-function CONTEXT:SetInput( i )
-    self:SetInputs( i )
-end
-
-function CONTEXT:SetInputs( ... )
+function CONTEXT:DependsOn( ... )
     self.inputs = { ... }
 end
 
