@@ -33,9 +33,7 @@ end )
 
 hook.Add( "PlayerDisconnected", "cfc_job_dependent_behaviour", function()
     -- Give time for player.GetAll() to update
-    timer.Simple( 0, function()
-        JDB.UpdateBehaviours()
-    end )
+    timer.Simple( 0, JDB.UpdateBehaviours )
 end )
 
 -- Include inbuilt behaviours
