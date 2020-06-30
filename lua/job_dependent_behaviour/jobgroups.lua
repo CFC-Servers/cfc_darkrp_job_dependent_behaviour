@@ -34,7 +34,7 @@ end
 function JDB.groups.getPlayers( name )
     name = string.lower( name )
 
-    if name == "ALL" then return player.GetAll() end
+    if name == "all" then return player.GetAll() end
 
     local getter = JDB.groups[name]
     if not getter then
