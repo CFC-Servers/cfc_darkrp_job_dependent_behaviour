@@ -26,6 +26,11 @@ local compFuncs = {
 
 function CONTEXT:SetAction( f )
     self.action = f
+
+    local this = self
+    timer.Simple( 0, function()
+        this:UpdateValue()
+    end )
 end
 
 function CONTEXT:SetEquation( f )

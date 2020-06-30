@@ -39,3 +39,5 @@ local _, files = file.Find( "job_dependent_behaviour/behaviours/*", "LUA" )
 for _, fileName in pairs( files ) do
     include( "job_dependent_behaviour/behaviours/" .. fileName )
 end
+
+hook.Run( "cfc_jbd_init" )
