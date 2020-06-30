@@ -1,5 +1,5 @@
 hook.Add( "cfc_jbd_init", "cfc_jbd_jobLimits", function()
-    do return end
+    --do return end
 
     -- Example
     -- Add job limits behaviour
