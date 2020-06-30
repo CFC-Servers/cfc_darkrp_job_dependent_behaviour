@@ -1,4 +1,4 @@
-hook.Add( "cfc_JDB_init", "cfc_JDB_jobLimits", function()
+hook.Add( "cfc_jdb_init", "cfc_jdb_jobLimits", function()
     --do return end
 
     -- Example
