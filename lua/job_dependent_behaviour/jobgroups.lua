@@ -86,7 +86,3 @@ end
 function JDB.groups.getPlayerCount( name )
     return #JDB.groups.getPlayers( name )
 end
-
-JDB.groups.addIfNotExists( "CP", function( ply )
-    return ply:isCP()
-end )

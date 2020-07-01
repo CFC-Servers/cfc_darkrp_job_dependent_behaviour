@@ -1,6 +1,13 @@
 local config = {}
 JDB.config = config
 
+-- Groups of jobs/custom jobs, defined with a name and either a list of jobs, under the key "jobs"
+-- or a getter function that takes a player and returns a boolean
+config.jobGroups = {
+    { name = "CP", getter = function( ply ) return ply:isCP() end },
+--    { name = "SomeGroup", jobs = { "Job1", "Job2" } }
+}
+
 -- Limit job counts by a percent of the total player count on the server
 config.playerCountLimits = {
 --    { job = "mercenary", percentOfPlayers = 25 }

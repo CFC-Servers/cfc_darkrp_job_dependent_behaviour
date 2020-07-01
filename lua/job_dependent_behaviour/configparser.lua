@@ -22,4 +22,10 @@ hook.Add( "cfc_jdb_init", "cfc_jdb_configParser", function()
             JDB.Threshold( limit.job, limit.percentThreshold / 100, limit.action )
         end
     end
+
+    if JDB.config.jobGroups then
+        for k, group in pairs( JDB.config.jobGroups ) do
+            JDB.groups.addIfNotExists( group.name, group.jobs or group.getter )
+        end
+    end
 end )
