@@ -108,3 +108,7 @@ function CONTEXT:UpdateValue()
         self.action( self.value )
     end
 end
+
+function CONTEXT:SetName( name )
+    self.name = name
+end

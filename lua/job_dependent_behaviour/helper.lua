@@ -4,11 +4,8 @@ end
 
 function JDB.RelationJobLimit( jobName, fromJob, multiplier )
     local limiter = JDB.new()
-    if type( fromJob ) == "table" then
-        limiter:DependsOn( unpack( fromJob ) )
-    else
-        limiter:DependsOn( fromJob )
-    end
+
+    limiter:DependsOn( fromJob )
 
     limiter:Via( function( plyCount )
         return math.ceil( plyCount * multiplier )

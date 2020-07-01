@@ -4,6 +4,8 @@ JDB.behaviours = JDB.behaviours or {}
 include( "context.lua" )
 include( "jobgroups.lua" )
 include( "helper.lua" )
+include( "configparser.lua" )
+include( "config.lua" )
 
 function JDB.new()
     local behaviour = {}
@@ -25,6 +27,12 @@ function JDB.UpdateBehaviours()
     end
 end
 
+function JDB.GetByName( name )
+    for k, behaviour in pairs( self.behaviours ) do
+        if behaviour.name == name then return behaviour end
+    end
+end
+
 hook.Add( "DarkRPVarChanged", "cfc_job_dependent_behaviour", function( ply, varName, prev, new )
     if varName ~= "job" then return end
 
@@ -36,12 +44,5 @@ hook.Add( "PlayerDisconnected", "cfc_job_dependent_behaviour", function()
     -- Give time for player.GetAll() to update
     timer.Simple( 0, JDB.UpdateBehaviours )
 end )
-
--- Include inbuilt behaviours
-local files = file.Find( "job_dependent_behaviour/behaviours/*", "LUA" )
-
-for _, fileName in pairs( files ) do
-    include( "job_dependent_behaviour/behaviours/" .. fileName )
-end
 
 hook.Run( "cfc_jdb_init" )
