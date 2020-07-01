@@ -1,1 +1,3 @@
 update_command.sh
+*.sublime-project
+*.sublime-workspace
