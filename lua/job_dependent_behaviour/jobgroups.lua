@@ -31,6 +31,29 @@ function JDB.groups.addIfNotExists( name, jobs )
     end
 end
 
+function JDB.groups.getMax( name )
+    name = string.lower( name )
+
+    local data = JDB.groups[name]
+    if type( data ) == "table" then
+        local total = 0
+        for k, job in pairs( data ) do
+            local jobData = DarkRP.getJobByCommand( job )
+            if jobData then
+                total = total + jobData.max
+            end
+        end
+
+        if total == 0 then
+            return #player.GetAll()
+        end
+
+        return total
+    else
+        return #player.GetAll()
+    end
+end
+
 function JDB.groups.getPlayers( name )
     name = string.lower( name )
 

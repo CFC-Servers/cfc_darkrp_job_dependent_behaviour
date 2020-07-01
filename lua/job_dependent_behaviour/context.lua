@@ -66,14 +66,19 @@ function CONTEXT:Via( f )
     self.equation = f
 end
 
-function CONTEXT:Threshhold( threshold, thresholdType )
+function CONTEXT:Threshhold( threshold, thresholdType, isPercent )
     local compFunc = compFuncs[thresholdType]
     if not compFunc then
         error( "Invalid comparison type" )
     end
 
+    local this = self
     self:Via( function( val )
-        return compFunc( val, threshold )
+        local other = threshold
+        if isPercent then
+            other = other * JDB.groups.getMax( this.inputs[1] )
+        end
+        return compFunc( val, other )
     end )
 end
 
