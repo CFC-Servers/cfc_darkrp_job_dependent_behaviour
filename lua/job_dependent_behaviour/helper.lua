@@ -15,12 +15,8 @@ end
 
 function JDB.Threshold( jobName, threshold, action, isPercent )
     local behaviour = JDB.new()
-    if type( jobName ) == "table" then
-        behaviour:DependsOn( unpack( jobName ) )
-    else
-        behaviour:DependsOn( jobName )
-    end
 
+    behaviour:DependsOn( jobName )
     behaviour:Threshold( threshold, JDB.GREATER_OR_EQUAL, isPercent )
     behaviour:Do( action )
 end
